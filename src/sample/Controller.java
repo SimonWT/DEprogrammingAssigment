@@ -82,7 +82,7 @@ public class Controller {
     }
 
     private void setCharts(double x0, double X, double y0, double N, double n0, double eN){
-        grid = new Grid(x0, X, y0, N);
+        grid = new Grid(x0, X, y0, N, n0, eN);
         xAxis1.setLowerBound(x0);
         MyChart1.getData().clear(); ErrorChart.getData().clear(); ErrorAnalChart.getData().clear();
 
@@ -90,6 +90,8 @@ public class Controller {
                  grid.getSeriesImprovedEuler(), grid.getSeriesRungeKutta());
         ErrorChart.getData().addAll(grid.getSeriesEulerError(), grid.getSeriesImprovedEulerError(),
                                                                    grid.getSeriesRungeKuttaError());
+        ErrorAnalChart.getData().addAll(grid.getSeriesEulerErrorN(), grid.getSeriesImprovedEulerErrorN(),
+                grid.getSeriesRungeKuttaErrorN());
 
 
     }

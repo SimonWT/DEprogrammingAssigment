@@ -105,4 +105,12 @@ public class Euler {
         return maxError;
     }
 
+    public double getIEulerError(){
+        return (new ImprovedEuler(x0, X, N, y0)).getMaxError();
+    }
+
+    public double getRKuttaError(){
+        return (new RungeKutta(x0, X, N, y0)).getMaxError();
+    }
+
 }
