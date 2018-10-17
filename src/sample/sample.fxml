@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <TabPane prefHeight="700.0" prefWidth="1280.0" tabClosingPolicy="ALL_TABS">
+        <tabs>
+          <Tab text="Solution">
+               <content>
+                  <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="661.0" prefWidth="100.0">
+                           <children>
+                              <DialogPane layoutX="9.0" layoutY="41.0" />
+                              <Label layoutX="35.0" layoutY="20.0" prefHeight="31.0" prefWidth="111.0" text="Equation:">
+                                 <font>
+                                    <Font name="Times New Roman Bold" size="25.0" />
+                                 </font></Label>
+                              <Label layoutX="172.0" layoutY="18.0" prefHeight="21.0" prefWidth="106.0" text=" y'=-y-x">
+                                 <font>
+                                    <Font name="System Italic" size="24.0" />
+                                 </font></Label>
+                              <Label layoutX="37.0" layoutY="121.0" text="x0" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Calibri" size="34.0" />
+                                 </font></Label>
+                              <TextField fx:id="textFieldx0" layoutX="92.0" layoutY="125.0" onAction="#updateAllInfo" prefHeight="31.0" prefWidth="133.0" />
+                              <TextField fx:id="textFieldx1" layoutX="92.0" layoutY="202.0" onAction="#updateAllInfo" prefHeight="31.0" prefWidth="135.0" />
+                              <TextField fx:id="textFieldx2" layoutX="92.0" layoutY="268.0" onAction="#updateAllInfo" prefHeight="31.0" prefWidth="134.0" />
+                              <TextField fx:id="textFieldx3" layoutX="92.0" layoutY="342.0" onAction="#updateAllInfo" prefHeight="31.0" prefWidth="135.0" />
+                              <Label layoutX="42.0" layoutY="263.0" text="X" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Calibri" size="34.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="37.0" layoutY="193.0" text="y0" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Calibri" size="34.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="41.0" layoutY="337.0" text="N" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Calibri" size="34.0" />
+                                 </font>
+                              </Label>
+                           </children></AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="662.0" prefWidth="894.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <LineChart fx:id="MyChart1" axisSortingPolicy="NONE" layoutX="-4.0" layoutY="1.0" prefHeight="325.0" prefWidth="889.0" title="Main function">
+                                            <xAxis>
+                                              <NumberAxis side="BOTTOM" fx:id="xAxis1" />
+                                            </xAxis>
+                                            <yAxis>
+                                              <NumberAxis fx:id="yAxis1" side="LEFT" />
+                                            </yAxis>
+                                          </LineChart>
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <LineChart fx:id="ErrorChart" prefHeight="325.0" prefWidth="889.0" title="Errors">
+                                             <xAxis>
+                                                <NumberAxis side="BOTTOM" fx:id="xErrorAnal" />
+                                             </xAxis>
+                                             <yAxis>
+                                                <NumberAxis fx:id="yErrorAnal" side="LEFT" />
+                                             </yAxis>
+                                          </LineChart>
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </content></Tab>
+          <Tab text="Error Analize">
+               <content>
+                  <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0">
+                     <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="661.0" prefWidth="100.0">
+                           <children>
+                              <DialogPane layoutX="9.0" layoutY="41.0" />
+                              <Label layoutX="35.0" layoutY="20.0" prefHeight="31.0" prefWidth="111.0" text="Equation:">
+                                 <font>
+                                    <Font name="Times New Roman Bold" size="25.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="172.0" layoutY="18.0" prefHeight="21.0" prefWidth="106.0" text=" y'=-y-x">
+                                 <font>
+                                    <Font name="System Italic" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="37.0" layoutY="121.0" text="n0" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Calibri" size="34.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="errAnaln0" layoutX="92.0" layoutY="125.0" onAction="#updateAllInfo" prefHeight="31.0" prefWidth="133.0" />
+                              <TextField fx:id="errAnalN" layoutX="92.0" layoutY="195.0" onAction="#updateAllInfo" prefHeight="31.0" prefWidth="135.0" />
+                              <Label layoutX="41.0" layoutY="190.0" text="N" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Calibri" size="34.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                           <children>
+                              <SplitPane orientation="VERTICAL" prefHeight="662.0" prefWidth="894.0">
+                                 <items>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <LineChart fx:id="ErrorAnalChart" prefHeight="660.0" prefWidth="889.0" title="Errors">
+                                             <xAxis>
+                                                <NumberAxis side="BOTTOM" fx:id="xAxisError" />
+                                             </xAxis>
+                                             <yAxis>
+                                                <NumberAxis fx:id="yAxisError" side="LEFT" />
+                                             </yAxis>
+                                          </LineChart>
+                                       </children>
+                                    </AnchorPane>
+                                 </items>
+                              </SplitPane>
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
+               </content></Tab>
+        </tabs>
+      </TabPane>
+   </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+</GridPane>
