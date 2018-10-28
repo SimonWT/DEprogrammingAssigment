@@ -8,6 +8,7 @@ public class ImprovedEuler extends Euler{
         super.errorSeries.setName("Improved Euler");
     }
 
+    //Get y_(i+1) by Improved Euler Method
     @Override
     protected double funcYi(double xLast, double yLast) {
         return yLast+super.h*

@@ -7,6 +7,7 @@ public class RungeKutta extends Euler {
         super.errorSeries.setName("Runge-Kutta");
     }
 
+    //Get y_(i+1) by Runge-Kutta Method
     @Override
     protected double funcYi(double xLast, double yLast) {
         double k1 = super.h*super.slope(xLast, yLast);

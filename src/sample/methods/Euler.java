@@ -5,75 +5,74 @@ import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 
 public class Euler {
-    protected XYChart.Series series;
-    protected XYChart.Series errorSeries;
-    private double x0;
-    private double X;
-    private double N;
-    private double y0;
-    private double c; //const
-    protected double h; //step
 
-    private double maxError=0;
+    private double maxError = 0;
 
     public Euler(double x0, double x, double n, double y0) {
         this.x0 = x0;
         X = x;
         N = n;
         this.y0 = y0;
-        this.c = (y0+x0-1)/Math.exp(-x0);
-        this.h = (X-x0)/this.N;
+        this.h = (X - x0) / this.N;
         this.series = new XYChart.Series();
         this.errorSeries = new XYChart.Series();
         this.series.setName("Euler");
         this.errorSeries.setName("Euler");
         setSeries();
-
     }
 
-    private void setSeries(){
+    //Set series for that solution
+    private void setSeries() {
         ObservableList<XYChart.Data> datas = FXCollections.observableArrayList();
         ObservableList<XYChart.Data> errorDatas = FXCollections.observableArrayList();
 
+        //Add initial dot to the data set
         datas.add(new XYChart.Data(x0, y0));
-        double error = exact(x0) - y0;
+        //Find initial error
+        double error = Math.abs(exact(x0) - y0);
         maxError = error;
         errorDatas.add(new XYChart.Data(x0, error));
 
-        double yLast =funcYi(x0, y0);
-        for(double i=x0+h; i<=X; i+=h){
-            double xi = i;
-            if(xi> X) break;
-            datas.add(new XYChart.Data(xi, yLast));
-            error = exact(xi) - yLast;
-            errorDatas.add(new XYChart.Data(xi, exact(xi) - yLast));
-            if(error> maxError) maxError = error;
-            yLast = funcYi(xi, yLast);
+        double y = funcYi(x0, y0); //Euler function from initial dot
+
+        for (double xi = x0 + h; xi <= X; xi += h) {
+            //Calculate error
+            error = Math.abs(exact(xi) - y);
+            //Find max error
+            if (error > maxError){
+                maxError = error;
+                System.out.println(maxError);
+            }
+            datas.add(new XYChart.Data(xi, y));
+            errorDatas.add(new XYChart.Data(xi, error));
+            //Euler function for next iteration
+            y = funcYi(xi, y);
         }
         errorSeries.setData(errorDatas);
         series.setData(datas);
     }
 
-    protected double slope(double x, double y){
-        return (-y-x);
+    //Differential Equation
+    protected double slope(double x, double y) {
+        return ( -y - x);
     }
 
-    private double getYi(double xLast, double yLast){
-        return funcYi(xLast,yLast);
-    }
-
-    protected double funcYi(double xLast, double yLast){
+    //Helper function, get 'eulerY'
+    protected double funcYi(double xLast, double yLast) {
         return (eulerY(xLast, yLast));
     }
 
-    protected double eulerY(double xLast, double yLast){
-        return yLast+h*slope(xLast, yLast);
+    //Get function y by Euler method
+    protected double eulerY(double xLast, double yLast) {
+        return yLast + h * slope(xLast, yLast);
     }
 
-    protected double exact(double xLast){
-        double c = (y0+x0-1)/Math.exp(-x0);
-        return -xLast+1+c*Math.exp(-xLast);
+    //Exact Solution
+    protected double exact(double xLast) {
+        double c = (y0 + x0 - 1) / Math.exp(-x0);
+        return -xLast + 1 + c * Math.exp(-xLast);
     }
+
 
     public XYChart.Series getSeries() {
         return series;
@@ -83,21 +82,19 @@ public class Euler {
         return errorSeries;
     }
 
-
-    public XYChart.Series getImprovedSeries(){
-        return  new ImprovedEuler(x0, X, N, y0).getSeries();
+    public XYChart.Series getImprovedSeries() {
+        return new ImprovedEuler(x0, X, N, y0).getSeries();
     }
 
-    public XYChart.Series getImprovedErrorSeries(){
-        return  new ImprovedEuler(x0, X, N, y0).getErrorSeries();
+    public XYChart.Series getImprovedErrorSeries() {
+        return new ImprovedEuler(x0, X, N, y0).getErrorSeries();
     }
 
-
-    public XYChart.Series getRungeKuttaSeries(){
+    public XYChart.Series getRungeKuttaSeries() {
         return (new RungeKutta(x0, X, N, y0)).getSeries();
     }
 
-    public XYChart.Series getRungeKuttaErrorSeries(){
+    public XYChart.Series getRungeKuttaErrorSeries() {
         return (new RungeKutta(x0, X, N, y0)).getErrorSeries();
     }
 
@@ -105,12 +102,20 @@ public class Euler {
         return maxError;
     }
 
-    public double getIEulerError(){
+    public double getIEulerError() {
         return (new ImprovedEuler(x0, X, N, y0)).getMaxError();
     }
 
-    public double getRKuttaError(){
+    public double getRKuttaError() {
         return (new RungeKutta(x0, X, N, y0)).getMaxError();
     }
+
+    protected XYChart.Series series;
+    protected XYChart.Series errorSeries;
+    private double x0;
+    private double X;
+    private double N;
+    private double y0;
+    protected double h; //step
 
 }

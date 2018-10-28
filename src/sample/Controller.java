@@ -84,7 +84,9 @@ public class Controller {
     private void setCharts(double x0, double X, double y0, double N, double n0, double eN){
         grid = new Grid(x0, X, y0, N, n0, eN);
         xAxis1.setLowerBound(x0);
-        MyChart1.getData().clear(); ErrorChart.getData().clear(); ErrorAnalChart.getData().clear();
+        MyChart1.getData().clear();
+        ErrorChart.getData().clear();
+        ErrorAnalChart.getData().clear();
 
         MyChart1.getData().addAll(grid.getFuncSeries(), grid.getSeriesEuler(),
                  grid.getSeriesImprovedEuler(), grid.getSeriesRungeKutta());
